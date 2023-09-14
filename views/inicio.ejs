@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <title>Foro</title>
+
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+          <a class="navbar-brand" style="color: rgb(86, 38, 184);"><h3>¡Hola! Bienvenidos a Nuestro Foro</h3></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto"> <!-- Utilizamos ml-auto aquí -->
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/agregar">Crear</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+
+  </head>
+<body>
+
+
+<div class="card text-center">
+  
+    <div class="card-body">
+      <h5 class="card-title">¿Desea Crear un Foro?</h5>
+      <p class="card-text">Haga clic en el botón "Crear foro" para empezar a crear uno nuevo</p>
+      <a type="button" href="/agregar" class="btn btn-outline-success">Crear Foro</a>
+    </div>
+    
+</div>
+
+<br/>
+<div class="card">
+    <h2 style="align-self: center;color: rgb(86, 38, 184);">Foros Creados </h2> 
+    <div class="card-body">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Contenido</th>
+                <th scope="col">Enlace</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              <% Temarios.forEach((item) => { %>
+              <tr>
+                <th scope="row"><%= item.id %></th>
+                <td><%= item.Titulo %></td>
+                <td><%= item.Contenido %></td>
+                <td>
+                  <% if (item.Imagen) { %>
+                    <img src="<%= item.Imagen %>" alt="Imagen del post" width="100">
+                  <% } else { %>
+                    <!-- Si no hay URL de imagen, no muestra ninguna imagen -->
+                    No se cargo ninguna Imagen
+                  <% } %>
+                </td>
+                <td><%= NuevoFormato(item.Fechac) %></td>
+                <td>
+                  <a type="button" class="bi bi-gear-fill " style="font-size: 25px; color: rgb(1, 185, 231);" href="/editar/<%= item.id %>">  </a>
+                </td>
+                <td>
+                  <a type="button" class="bi bi-x-circle-fill" style="font-size: 25px; color: rgb(231, 1, 1);" href="/eliminar/<%= item.id %>"></a>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+            
+          </table>
+    </div>
+</div>
+
+
+<%
+    function NuevoFormato(FechaING) {
+        // Crea un objeto de fecha a partir de la cadena de fecha
+        const fe = new Date(FechaING);
+
+        // Obtiene el día, el mes y el año
+        const dia = fe.getDate();
+        const mes = fe.getMonth() + 1; // Los meses en JavaScript son 0-11, por lo que sumamos 1
+        const ano = fe.getFullYear();
+
+        // Formatea la fecha como "DD/MM/AAAA"
+        return `${dia}/${mes}/${ano}`;
+    }
+    %>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</body>
+</html>

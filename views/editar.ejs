@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Foro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" style="color: rgb(86, 38, 184);"><h3>¡Hola! Bienvenidos a Nuestro Foro</h3></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto"> <!-- Utilizamos ml-auto aquí -->
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/agregar">Crear</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</head>
+<body>
+    <div style="padding: 50px;">
+        <div>
+            <a type="button" class="bi bi-arrow-left-square-fill" style="font-size: 25px; color: rgb(32, 26, 44);"href="/"> </a>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Editar Foro <%= tarea.id %>
+            </div>
+            
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="Titulo" class="form-label">Titulo</label>
+                        <input type="text" class="form-control" id="Titulo" name="Titulo" value="<%= tarea.Titulo %>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" value="<%= tarea.Contenido %>" required>
+                    </div>
+                     
+                    <div class="mb-3">
+                      <label for="URL" class="form-label">URL</label>
+                      <input type="text" class="form-control" id="URL" name="URL" value="<%= tarea.Imagen %>" >
+                  </div>
+                   
+                  <div>
+                    <% if (tarea.Imagen) { %>
+                        <img src="<%= tarea.Imagen %>" alt="Imagen del post" width="100">
+                      <% } else { %>
+                        <!-- Si no hay URL de imagen, no muestra ninguna imagen -->
+                        Sin imagen disponible
+                        <br/>
+                      <% } %>
+                  </div>
+                  
+
+                    <button type="submit" class="btn btn-primary">
+                        Editar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
